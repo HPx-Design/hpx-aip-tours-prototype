@@ -530,7 +530,7 @@ canvas.confetti { width: 412px !important; height: 852px !important; left: 0; to
 .v .hot.pressed, .v [data-tap].pressed { transform: scale(.97); opacity: .85; transition: transform .16s var(--soft), opacity .16s var(--soft); }
 
 /* tap areas: one outline language everywhere, on by toggle or briefly when you tap a dead spot */
-.phone .hot::after, .phone [data-tap]::after, .phone .seg button::after, .phone #tourCardSlot .tcard::after, .phone .coach .cta::after, .phone .coach .cta2::after, .phone .coach .x::after, .phone .tcard .hx::after, .phone #t-tourrow::after, .phone .tgl::after { content: ""; position: absolute; left: 50%; top: 50%; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .95); box-shadow: 0 0 0 1.5px rgba(58, 77, 246, .75), 0 0 14px 2px rgba(58, 77, 246, .45), inset 0 0 10px rgba(58, 77, 246, .35); background: radial-gradient(circle, rgba(255, 255, 255, .55) 0 22%, rgba(120, 140, 255, .18) 40%, transparent 62%); opacity: 0; transform: scale(.15); pointer-events: none; z-index: 30; }
+.phone .hot::after, .phone [data-tap]::after, .phone .seg button::after, .phone #tourCardSlot .tcard::after, .phone .coach .cta::after, .phone .coach .cta2::after, .phone .coach .x::after, .phone .tcard .hx::after, .phone #t-tourrow::after, .phone .tgl::after { content: ""; position: absolute; left: 50%; top: 50%; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; border: 2.5px solid #ff1f8f; box-shadow: 0 0 14px 2px rgba(255, 31, 143, .55), inset 0 0 10px rgba(255, 31, 143, .4); background: radial-gradient(circle, rgba(255, 105, 180, .7) 0 22%, rgba(255, 31, 143, .2) 40%, transparent 62%); opacity: 0; transform: scale(.15); pointer-events: none; z-index: 30; }
 .phone [data-tap] { position: relative; }
 .phone.show-hot .hot::after, .phone.show-hot [data-tap]::after, .phone.show-hot .seg button::after, .phone.show-hot #tourCardSlot .tcard::after, .phone.show-hot .coach .cta::after, .phone.show-hot .coach .cta2::after, .phone.show-hot .coach .x::after, .phone.show-hot .tcard .hx::after, .phone.show-hot #t-tourrow::after, .phone.show-hot .tgl::after { animation: waterDrop 1.8s cubic-bezier(.2, .7, .3, 1) infinite; }
 .phone.reveal .hot::after, .phone.reveal [data-tap]::after, .phone.reveal .seg button::after, .phone.reveal #tourCardSlot .tcard::after, .phone.reveal .coach .cta::after, .phone.reveal .coach .cta2::after, .phone.reveal .coach .x::after, .phone.reveal .tcard .hx::after, .phone.reveal #t-tourrow::after, .phone.reveal .tgl::after { animation: waterDrop 1.1s cubic-bezier(.2, .7, .3, 1) both; }
@@ -956,7 +956,21 @@ html.device-mode .page { display: block; padding: 0; margin: 0; gap: 0; min-heig
 html.device-mode .stage { position: fixed; left: 0; top: env(safe-area-inset-top); overflow: hidden; }
 html.device-mode .phone { border-radius: 0; box-shadow: none; }
 </style>
-<div id="safeProbe"></div>
+
+<style>
+.notes .phonehelp { border: 1px solid var(--panel-line); border-radius: 14px; background: #fff; padding: 12px 14px; font-size: 13px; line-height: 1.45; color: var(--panel-fg); }
+.notes .phonehelp summary { cursor: pointer; font-weight: 600; font-size: 14px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.notes .phonehelp summary::-webkit-details-marker { display: none; }
+.notes .phonehelp summary::after { content: '+'; font-weight: 400; font-size: 18px; color: var(--panel-muted); }
+.notes .phonehelp[open] summary::after { content: '–'; }
+.notes .phonehelp ol { margin: 10px 0 6px; padding-left: 18px; display: grid; gap: 6px; }
+.notes .phonehelp p { margin: 0; color: var(--panel-muted); }
+.a2hs { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 9999; display: none; gap: 12px; align-items: center; padding: 12px 12px 12px 16px; border-radius: 16px; background: rgba(18, 20, 40, .94); color: #fff; font: 500 14px/1.4 var(--font); box-shadow: 0 12px 30px rgba(0,0,0,.3); }
+.a2hs b { font-weight: 700; }
+.a2hs button { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 16px; cursor: pointer; }
+html.device-mode:not(.standalone) .a2hs.on { display: flex; }
+</style>
+<div id="safeProbe"></div><div class="a2hs" id="a2hs" role="note"><span>For full screen, add this to your Home Screen: tap <b>Share</b> then <b>Add to Home Screen</b> (iPhone) or <b>⋮</b> then <b>Add to Home screen</b> (Android).</span><button type="button" aria-label="Dismiss">✕</button></div>
 <div class="page">
   <aside class="notes">
     <div class="eyebrow">Prototype · Flow 2</div>
@@ -966,6 +980,15 @@ html.device-mode .phone { border-radius: 0; box-shadow: none; }
     <div class="state" aria-live="polite"><span>Now showing</span><b id="jName"></b><small id="jNote"></small><small id="tourState" hidden>Tour: <b id="stateLabel" style="font-size:13px">Not started</b></small></div>
     <div class="ctrls"><button class="restart" id="jBack" type="button">Back</button><button class="restart" id="jRestart" type="button">Restart</button></div>
     <label class="hot-toggle"><input type="checkbox" id="showHot"><span class="sw"><i></i></span>Show tap areas</label>
+    <details class="phonehelp">
+      <summary>Test it on your phone</summary>
+      <ol>
+        <li>Open this page’s link on your phone.</li>
+        <li><b>iPhone:</b> in Safari, tap Share, then <b>Add to Home Screen</b>.<br><b>Android:</b> in Chrome, tap ⋮, then <b>Add to Home screen</b>.</li>
+        <li>Open it from the new <b>AIP prototype</b> icon. It runs full screen, like the real app.</li>
+      </ol>
+      <p>To start over, close the app and reopen it.</p>
+    </details>
   </aside>
 
   <div class="stage" id="stage">
@@ -2430,6 +2453,17 @@ html.device-mode .phone { border-radius: 0; box-shadow: none; }
 
   slot.hidden = true;
   go('s01', 'fade');
+})();
+</script>
+
+<script>
+(() => {
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (standalone) document.documentElement.classList.add('standalone');
+  const hint = document.getElementById('a2hs'); let seen = false;
+  try { seen = localStorage.getItem('aip-a2hs') === '1'; } catch (e) {}
+  if (!seen && !standalone) hint.classList.add('on');
+  hint.querySelector('button').addEventListener('click', () => { hint.classList.remove('on'); try { localStorage.setItem('aip-a2hs', '1'); } catch (e) {} });
 })();
 </script>
 
