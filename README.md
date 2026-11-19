@@ -2,7 +2,7 @@
 
 An interactive prototype of the All-In Plan journey: the welcome email, app onboarding, printer setup, the printer feature tour, a jump ahead three weeks, and the All-In Plan tips.
 
-**Open the prototype:** [https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/](https://hpx-design.github.io/hpx-aip-tours-prototype/)
+**Open the prototype:** [https://hpx-design.github.io/hpx-aip-tours-prototype](https://hpx-design.github.io/hpx-aip-tours-prototype/)
 
 ## Test on your phone (recommended)
 
